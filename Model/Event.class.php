@@ -26,6 +26,8 @@ class Event extends Entity
     protected $reachPoints = null;        /* Points granted when reachRequiredRepetitions are reached */
     protected $eachCallback = null;
     protected $reachCallback = null;
+    
+    protected $combinable = null;
 
     function __construct($stdClass = null)
     {
@@ -96,6 +98,10 @@ class Event extends Entity
     public function getAllowRepetitions()
     {
         return $this->allowRepetitions;
+    }
+    public function getCombinable()
+    {
+        return $this->combinable;
     }
 
     /**
@@ -240,6 +246,17 @@ class Event extends Entity
     {
         if (!is_numeric($n)) throw new Exception(__METHOD__ . ': Invalid reachRequiredRepetitions');
         $this->reachRequiredRepetitions = $n;
+        return $this;
+    }
+    /**
+     * @param $n
+     * @return Event
+     * @throws Exception
+     */
+    public function setCombinable($n)
+    {
+        if (!is_numeric($n)) throw new Exception(__METHOD__ . ': Invalid combinable value');
+        $this->combinable = $n;
         return $this;
     }
 
